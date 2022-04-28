@@ -18,9 +18,22 @@ export const getBlogs = createAsyncThunk(
     }
   }
 );
+export const getCategories = createAsyncThunk(
+  "userblogs/getCategories",
+  async (_, { rejectWithValue }) => {
+    try {
+      const init = query(collection(db, "Categories"));
+      const res = await getDocs(init);
+      return res;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 
 const initialState = {
   blogs: [],
+  categories: [],
   status: "loading",
   error: null,
 };
@@ -30,11 +43,15 @@ const dataSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getBlogs.fulfilled, (state, { payload }) => {
-      state.blogs = payload.docs.map((d) => d.data());
-      //   console.log(state.blogs);
-      state.status = "idle";
-    });
+    builder
+      .addCase(getBlogs.fulfilled, (state, { payload }) => {
+        state.blogs = payload.docs.map((d) => d.data());
+        state.status = "idle";
+      })
+      .addCase(getCategories.fulfilled, (state, { payload }) => {
+        state.categories = payload.docs.map((d) => d.data());
+        state.status = "idle";
+      });
   },
 });
 

@@ -24,7 +24,7 @@
   position: absolute;
   bottom: 1rem;
   left: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: white;
 }
@@ -60,4 +60,21 @@
 .social img {
   margin: 6px;
   height: 27px;
+}
+.overlay {
+  position: absolute;
+  background-color: rgba(7, 7, 7, 0.2);
+  top: 0;
+  height: 98%;
+  width: 100%;
+  border-radius: 5px;
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading img {
+  height: 3rem;
+  margin-top: 10rem;
 }

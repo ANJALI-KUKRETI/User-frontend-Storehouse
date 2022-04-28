@@ -1,47 +1,41 @@
-import React from "react";
-import demo from "../assets/demo.png";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getBlogs } from "../Reducers/dataSlice";
+import spinner from "../assets/spinner.gif";
+import { v4 as uuidv4 } from "uuid";
+import formatDate from "../utils/formate-date";
 import "./Recent.css";
 
 const Recent = () => {
+  const dispatch = useDispatch();
+  const status = useSelector((state) => state.data.status);
+  useEffect(() => {
+    dispatch(getBlogs());
+  }, []);
+  const blogs = useSelector((state) => state.data.blogs);
+  const temp = blogs.slice(0, 3);
   return (
     <div className="card">
       <div className="headingR">Recent Posts</div>
-      <div className="row">
-        <div className="imageT">
-          <img src={demo} />
+      {status === "loading" && (
+        <div className="loading">
+          <img src={spinner} alt="spinner" />
         </div>
-        <div className="details">
-          <div className="titleR">Storehouse is founded in 2018</div>
-          <div className="down">
-            <div className="dateR">26 Sept, 3033</div>
-            <div className="comments">23 comments</div>
+      )}
+      {temp.map((t) => (
+        <div className="row" key={uuidv4()}>
+          <div className="imageT">
+            <img src={t.titleImage} />
+          </div>
+          <div className="details">
+            <div className="titleR">{t.title}</div>
+            <div className="down">
+              <div className="dateR">{formatDate(t.date)}</div>
+              <div className="comments">23 comments</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="imageT">
-          <img src={demo} />
-        </div>
-        <div className="details">
-          <div className="titleR">Storehouse is founded in 2018</div>
-          <div className="down">
-            <div className="dateR">26 Sept, 3033</div>
-            <div className="comments">23 comments</div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="imageT">
-          <img src={demo} />
-        </div>
-        <div className="details">
-          <div className="titleR">Storehouse is founded in 2018</div>
-          <div className="down">
-            <div className="dateR">26 Sept, 3033</div>
-            <div className="comments">23 comments</div>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
   );
 };
