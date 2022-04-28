@@ -1,0 +1,16 @@
+.categoriesR {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cat {
+  margin: 7px;
+  color: rgba(140, 140, 140, 0.9);
+  cursor: pointer;
+  background: #f3f3f3;
+  border-radius: 5px;
+  padding: 10px 14px;
+}
+.active {
+  background: linear-gradient(90.73deg, #7000ff 0.3%, #9f02ff 118.8%);
+  color: white;
+}

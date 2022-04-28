@@ -1,0 +1,60 @@
+.cardContainer {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.card {
+  height: 453px;
+  width: 385px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+.bannerImage {
+  position: relative;
+}
+.bannerImage img {
+  width: 385px;
+  height: 174px;
+  border-radius: 5px;
+}
+.title {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+}
+.cardContent {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.one {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+.date {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  background: linear-gradient(90.73deg, #7000ff 0.3%, #9f02ff 118.8%);
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+.social {
+  margin-top: 20px;
+}
+.content {
+  color: rgba(60, 60, 67, 0.8);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+}
+.social img {
+  margin: 6px;
+  height: 27px;
+}
