@@ -1,0 +1,54 @@
+.wrapper {
+  height: 100%;
+  /* width: 100%; */
+  padding: 10px;
+  border-radius: 5px;
+  background: white;
+}
+.bannerImg {
+  position: relative;
+}
+.bannerImg img {
+  width: 100%;
+  height: 360px;
+}
+.icons {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  right: 1rem;
+}
+.icons img {
+  height: 30px;
+  margin: 5px;
+  cursor: pointer;
+}
+.wrapperDown {
+  padding: 2rem 4rem;
+}
+
+.titleDetail {
+  font-size: 25px;
+  font-weight: bold;
+}
+.authorAndView {
+  display: flex;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  color: rgba(60, 60, 67, 0.8);
+  font-weight: 600;
+}
+.views {
+  margin-left: 1.5rem;
+}
+.contentDetail {
+  color: rgba(60, 60, 67, 0.8);
+  line-height: 26px;
+  font-size: 15px;
+  letter-spacing: 0.4px;
+}
+.dateDetail {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 14px;
+}

@@ -78,3 +78,15 @@
   height: 3rem;
   margin-top: 10rem;
 }
+.pageBtns {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 2rem 0 2rem;
+}
+.pageBtns button {
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}

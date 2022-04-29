@@ -5,6 +5,7 @@ import Blogs from "./components/Blogs";
 import Recent from "./components/Recent";
 import Categories from "./components/Categories";
 import { Route, Routes } from "react-router-dom";
+import BlogDetail from "./components/BlogDetail";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Routes>
               <Route path="/:name" element={<Blogs />} />
               <Route path="/" element={<Blogs />} />
+              <Route path="/detail/:id" element={<BlogDetail />} />
             </Routes>
           </div>
           <div className="right">
