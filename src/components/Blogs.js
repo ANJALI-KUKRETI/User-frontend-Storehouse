@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
-
+import { useParams } from "react-router-dom";
 import "./Blogs.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogs, getNextBlogs, getPrevBlogs } from "../Reducers/dataSlice";
+import {
+  getBlogsCategoryWise,
+  getNextBlogs,
+  getPrevBlogs,
+} from "../Reducers/dataSlice";
 import CardContainer from "./CardContainer";
 
 const Blogs = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const params = useParams().name;
+  const temp = params && params.split("-").join(" ");
+  const name = params ? temp : "All";
   useEffect(() => {
-    dispatch(getBlogs());
+    dispatch(getBlogsCategoryWise(name));
   }, [dispatch]);
   const blogs = useSelector((state) => state.data.blogs);
   const last = useSelector((state) => state.data.last);

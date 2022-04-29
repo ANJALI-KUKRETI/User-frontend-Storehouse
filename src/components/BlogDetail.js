@@ -14,10 +14,6 @@ const BlogDetail = () => {
   const blogId = useParams().id;
   const blogs = useSelector((state) => state.data.blogs);
   const currBlog = blogs.find((blog) => blog.id === blogId);
-
-  console.log(currBlog);
-  console.log(blogId);
-  console.log(blogs);
   return (
     <div className="wrapper">
       <div className="bannerImg">

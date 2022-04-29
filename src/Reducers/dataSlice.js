@@ -16,27 +16,60 @@ import {
   limitToLast,
 } from "firebase/firestore";
 
-export const getBlogs = createAsyncThunk(
-  "userblogs/getBlogs",
+export const getBlogsCategoryWise = createAsyncThunk(
+  "userblogs/getBlogsCategoryWise",
+  async (category, { rejectWithValue, dispatch }) => {
+    try {
+      if (category === "All") {
+        const init = query(
+          collection(db, "Blogs"),
+          orderBy("createdAt", "desc"),
+          limit(4)
+        );
+        const res = await getDocs(init);
+        const initForLength = query(collection(db, "Blogs"));
+        const resL = await getDocs(initForLength);
+        const temp = resL.docs.map((d) => d.data());
+        dispatch(setLength(temp.length));
+        const lastVisible = res.docs[res.docs.length - 1];
+        dispatch(setLastVisible(lastVisible));
+        const lastVisibleFirst = res.docs[0];
+        dispatch(setFirstVisible(lastVisibleFirst));
+        return res;
+      } else {
+        const init = query(
+          collection(db, "Blogs"),
+          where("category", "==", category)
+        );
+        const res = await getDocs(init);
+        const initForLength = query(
+          collection(db, "Blogs"),
+          where("category", "==", category)
+        );
+        const resL = await getDocs(initForLength);
+        const temp = resL.docs.map((d) => d.data());
+        dispatch(setLength(temp.length));
+        const lastVisible = res.docs[res.docs.length - 1];
+        dispatch(setLastVisible(lastVisible));
+        const lastVisibleFirst = res.docs[0];
+        dispatch(setFirstVisible(lastVisibleFirst));
+        return res;
+      }
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+export const getRecentBlogs = createAsyncThunk(
+  "userblogs/getRecentBlogs",
   async (_, { rejectWithValue, dispatch }) => {
     try {
       const init = query(
         collection(db, "Blogs"),
         orderBy("createdAt", "desc"),
-        limit(4)
+        limit(3)
       );
       const res = await getDocs(init);
-      const initForLength = query(
-        collection(db, "Blogs"),
-        orderBy("createdAt", "desc")
-      );
-      const resL = await getDocs(initForLength);
-      const temp = resL.docs.map((d) => d.data());
-      dispatch(setLength(temp.length));
-      const lastVisible = res.docs[res.docs.length - 1];
-      dispatch(setLastVisible(lastVisible));
-      const lastVisibleFirst = res.docs[0];
-      dispatch(setFirstVisible(lastVisibleFirst));
       return res;
     } catch (err) {
       return rejectWithValue(err.message);
@@ -99,50 +132,6 @@ export const getCategories = createAsyncThunk(
     }
   }
 );
-export const getBlogsCategoryWise = createAsyncThunk(
-  "userblogs/getBlogsCategoryWise",
-  async (category, { rejectWithValue, dispatch }) => {
-    try {
-      if (category === "All") {
-        const init = query(
-          collection(db, "Blogs"),
-          orderBy("createdAt", "desc"),
-          limit(4)
-        );
-        const res = await getDocs(init);
-        const initForLength = query(collection(db, "Blogs"));
-        const resL = await getDocs(initForLength);
-        const temp = resL.docs.map((d) => d.data());
-        dispatch(setLength(temp.length));
-        const lastVisible = res.docs[res.docs.length - 1];
-        dispatch(setLastVisible(lastVisible));
-        const lastVisibleFirst = res.docs[0];
-        dispatch(setFirstVisible(lastVisibleFirst));
-        return res;
-      } else {
-        const init = query(
-          collection(db, "Blogs"),
-          where("category", "==", category)
-        );
-        const res = await getDocs(init);
-        const initForLength = query(
-          collection(db, "Blogs"),
-          where("category", "==", category)
-        );
-        const resL = await getDocs(initForLength);
-        const temp = resL.docs.map((d) => d.data());
-        dispatch(setLength(temp.length));
-        const lastVisible = res.docs[res.docs.length - 1];
-        dispatch(setLastVisible(lastVisible));
-        const lastVisibleFirst = res.docs[0];
-        dispatch(setFirstVisible(lastVisibleFirst));
-        return res;
-      }
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
 
 const initialState = {
   blogs: [],
@@ -172,8 +161,7 @@ const dataSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getBlogs.fulfilled, (state, { payload }) => {
-        state.blogs = payload.docs.map((d) => d.data());
+      .addCase(getRecentBlogs.fulfilled, (state, { payload }) => {
         state.recents = payload.docs.map((d) => d.data());
         state.status = "idle";
       })

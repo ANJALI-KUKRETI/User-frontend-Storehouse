@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getBlogs } from "../Reducers/dataSlice";
+import { getRecentBlogs } from "../Reducers/dataSlice";
 import spinner from "../assets/spinner.gif";
 import { v4 as uuidv4 } from "uuid";
 import formatDate from "../utils/formate-date";
@@ -10,7 +10,7 @@ const Recent = () => {
   const dispatch = useDispatch();
   const status = useSelector((state) => state.data.status);
   useEffect(() => {
-    dispatch(getBlogs());
+    dispatch(getRecentBlogs());
   }, []);
   const blogs = useSelector((state) => state.data.recents);
   const temp = blogs.slice(0, 3);
