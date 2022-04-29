@@ -13,12 +13,16 @@ import { useSelector } from "react-redux";
 
 const CardContainer = ({ data }) => {
   const status = useSelector((state) => state.data.status);
+
   return (
     <div className="cardContainer">
       {status === "loading" && (
         <div className="loading">
           <img src={spinner} alt="spinner" />
         </div>
+      )}
+      {data.length === 0 && status === "idle" && (
+        <div style={{ color: "white" }}>No Blogs Found!</div>
       )}
       {data.map((blog) => (
         <div className="card" key={uuidv4()}>

@@ -10,7 +10,7 @@ const Blogs = () => {
 
   useEffect(() => {
     dispatch(getBlogs());
-  }, []);
+  }, [dispatch]);
   const blogs = useSelector((state) => state.data.blogs);
 
   return <CardContainer data={blogs} />;

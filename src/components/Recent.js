@@ -12,7 +12,7 @@ const Recent = () => {
   useEffect(() => {
     dispatch(getBlogs());
   }, []);
-  const blogs = useSelector((state) => state.data.blogs);
+  const blogs = useSelector((state) => state.data.recents);
   const temp = blogs.slice(0, 3);
   return (
     <div className="card">
@@ -21,6 +21,9 @@ const Recent = () => {
         <div className="loading">
           <img src={spinner} alt="spinner" />
         </div>
+      )}
+      {temp.length === 0 && status === "idle" && (
+        <div style={{ textAlign: "center" }}>No Blogs Found!</div>
       )}
       {temp.map((t) => (
         <div className="row" key={uuidv4()}>

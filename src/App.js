@@ -4,6 +4,7 @@ import "./App.css";
 import Blogs from "./components/Blogs";
 import Recent from "./components/Recent";
 import Categories from "./components/Categories";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -24,7 +25,10 @@ function App() {
         </div>
         <div className="container">
           <div className="blogs">
-            <Blogs />
+            <Routes>
+              <Route path="/:name" element={<Blogs />} />
+              <Route path="/" element={<Blogs />} />
+            </Routes>
           </div>
           <div className="right">
             <div className="recent">
