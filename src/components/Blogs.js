@@ -15,14 +15,15 @@ const Blogs = () => {
   const params = useParams().name;
   const temp = params && params.split("-").join(" ");
   const name = params ? temp : "All";
-  useEffect(() => {
-    dispatch(getBlogsCategoryWise(name));
-  }, [dispatch]);
   const blogs = useSelector((state) => state.data.blogs);
   const last = useSelector((state) => state.data.last);
   const first = useSelector((state) => state.data.first);
   const length = useSelector((state) => state.data.length);
   const status = useSelector((state) => state.data.status);
+  useEffect(() => {
+    dispatch(getBlogsCategoryWise(name));
+  }, [dispatch, name]);
+
   const moveNextHandler = (e) => {
     e.preventDefault();
     dispatch(getNextBlogs(last));

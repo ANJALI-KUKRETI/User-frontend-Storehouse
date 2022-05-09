@@ -15,9 +15,6 @@ import { NavLink } from "react-router-dom";
 const CardContainer = ({ data }) => {
   const status = useSelector((state) => state.data.status);
 
-  const showDetail = (blog) => {
-    console.log(blog);
-  };
   return (
     <div className="cardContainer">
       {status === "loading" && (
@@ -36,13 +33,8 @@ const CardContainer = ({ data }) => {
       {status === "idle" &&
         data.map((blog) => (
           <div className="card" key={uuidv4()}>
-            <div
-              className="bannerImage"
-              onClick={() => {
-                showDetail(blog);
-              }}
-            >
-              <img src={blog.titleImage} alt="demo" />
+            <div className="bannerImage">
+              <img src={blog.titleImage} alt={blog.title} />
               <div className="overlay"></div>
               <div className="title">{blog.title}</div>
             </div>
@@ -50,7 +42,7 @@ const CardContainer = ({ data }) => {
               <div className="one">
                 <div className="date">{formatDate(blog.date)}</div>
                 <div className="views">
-                  <img src={eye} /> 5k View
+                  <img src={eye} alt="eye" /> 5k View
                 </div>
               </div>
               <div className="content">

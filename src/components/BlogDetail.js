@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import instagram from "../assets/instagram.png";
 import youtube from "../assets/youtube.png";
 import linkedin from "../assets/linkedin.png";
@@ -6,9 +6,8 @@ import twitter from "../assets/twitter.png";
 import facebook from "../assets/facebook.png";
 import formatDate from "../utils/formate-date";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./BlogDetail.css";
-import { getBlogs } from "../Reducers/dataSlice";
 
 const BlogDetail = () => {
   const blogId = useParams().id;
